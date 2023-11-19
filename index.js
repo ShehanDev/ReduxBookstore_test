@@ -5,11 +5,23 @@ console.log("from index redux app");
 //redux app
 //Actions:- only way to app can interact with the redux store
 
+//book oder  action
 //action type
 const BOOK_ORDERED = "BOOK_ORDERED";
 //action creator
 function OderBook() {
-  return { type: BOOK_ORDERED, quantity: 1 };
+  return { type: BOOK_ORDERED, payload: 1 };
+}
+
+//book restock action
+//type
+const BOOK_STOKED = "BOOK_STOKED";
+//action creator
+function bookRestock(qty = 1) {
+  return {
+    type: BOOK_STOKED,
+    payload: qty,
+  };
 }
 
 //Reducers:- apps state changes in response to  actions sent by to store
@@ -26,7 +38,13 @@ const reducer = (state = initialState, action) => {
       return {
         //get copy of previous state
         ...state,
-        noOfBooks: state.noOfBooks - 1,
+        noOfBooks: state.noOfBooks - 2,
+      };
+
+    case BOOK_STOKED:
+      return {
+        ...state,
+        noOfBooks: state.noOfBooks + action.payload,
       };
     default:
       return state;
@@ -52,4 +70,5 @@ const unsubscribe = store.subscribe(() =>
 store.dispatch(OderBook());
 store.dispatch(OderBook());
 store.dispatch(OderBook());
+store.dispatch(bookRestock(3));
 unsubscribe();
