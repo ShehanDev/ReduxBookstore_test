@@ -6,21 +6,37 @@ console.log("from index redux app");
 //redux app
 //Actions:- only way to app can interact with the redux store
 
-//book oder  action
-//action type
+//type
 const BOOK_ORDERED = "BOOK_ORDERED";
+const BOOK_STOKED = "BOOK_STOKED";
+const Magazine_ORDERED = "Magazine_ORDERED";
+const Magazine_STOKED = "Magazine_STOKED";
+
+//book oder  action
 //action creator
 function OderBook() {
   return { type: BOOK_ORDERED, payload: 1 };
 }
 
 //book restock action
-//type
-const BOOK_STOKED = "BOOK_STOKED";
 //action creator
 function bookRestock(qty = 1) {
   return {
     type: BOOK_STOKED,
+    payload: qty,
+  };
+}
+
+function oderMagazine(qty1 = 1) {
+  return {
+    type: Magazine_ORDERED,
+    payload: qty1,
+  };
+}
+
+function restockMagazine(qty = 1) {
+  return {
+    type: Magazine_STOKED,
     payload: qty,
   };
 }
@@ -31,6 +47,7 @@ function bookRestock(qty = 1) {
 //initial state
 const initialState = {
   noOfBooks: 10,
+  noOfMagazines: 20,
 };
 
 const reducer = (state = initialState, action) => {
@@ -47,6 +64,19 @@ const reducer = (state = initialState, action) => {
         ...state,
         noOfBooks: state.noOfBooks + action.payload,
       };
+
+    case Magazine_ORDERED:
+      return {
+        ...state,
+        noOfMagazines: state.noOfMagazines - action.payload,
+      };
+
+    case Magazine_STOKED:
+      return {
+        ...state,
+        noOfMagazines: state.noOfMagazines + action.payload,
+      };
+
     default:
       return state;
   }
@@ -74,7 +104,12 @@ const unsubscribe = store.subscribe(() =>
 // store.dispatch(bookRestock(3));
 
 //bind action creater:dispatch with action
-const actions = bindActionCreators({ OderBook, bookRestock }, store.dispatch);
+const actions = bindActionCreators(
+  { OderBook, bookRestock, oderMagazine, restockMagazine },
+  store.dispatch
+);
 actions.OderBook();
 actions.bookRestock(5);
+actions.oderMagazine(3);
+actions.restockMagazine(13);
 unsubscribe();
