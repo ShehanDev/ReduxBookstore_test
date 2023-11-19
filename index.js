@@ -1,6 +1,7 @@
 const redux = require("redux");
-
 const createStore = redux.createStore;
+const bindActionCreators = redux.bindActionCreators;
+
 console.log("from index redux app");
 //redux app
 //Actions:- only way to app can interact with the redux store
@@ -67,8 +68,13 @@ const unsubscribe = store.subscribe(() =>
   console.log("updated state ", store.getState())
 );
 
-store.dispatch(OderBook());
-store.dispatch(OderBook());
-store.dispatch(OderBook());
-store.dispatch(bookRestock(3));
+// store.dispatch(OderBook());
+// store.dispatch(OderBook());
+// store.dispatch(OderBook());
+// store.dispatch(bookRestock(3));
+
+//bind action creater:dispatch with action
+const actions = bindActionCreators({ OderBook, bookRestock }, store.dispatch);
+actions.OderBook();
+actions.bookRestock(5);
 unsubscribe();
