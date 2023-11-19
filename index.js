@@ -1,6 +1,7 @@
 const redux = require("redux");
 const createStore = redux.createStore;
 const bindActionCreators = redux.bindActionCreators;
+const combineReducers = redux.combineReducers;
 
 console.log("from index redux app");
 //redux app
@@ -45,12 +46,15 @@ function restockMagazine(qty = 1) {
 //accept argument : action, current state , return next state
 
 //initial state
-const initialState = {
+const initialBookState = {
   noOfBooks: 10,
+};
+
+const initialMagazineState = {
   noOfMagazines: 20,
 };
 
-const reducer = (state = initialState, action) => {
+const bookReducer = (state = initialBookState, action) => {
   switch (action.type) {
     case BOOK_ORDERED:
       return {
@@ -65,6 +69,13 @@ const reducer = (state = initialState, action) => {
         noOfBooks: state.noOfBooks + action.payload,
       };
 
+    default:
+      return state;
+  }
+};
+
+const magazineReducer = (state = initialMagazineState, action) => {
+  switch (action.type) {
     case Magazine_ORDERED:
       return {
         ...state,
@@ -90,7 +101,12 @@ const reducer = (state = initialState, action) => {
 // 4. **Subscribe Method:** Enables the registration of listeners that execute a function whenever the state in the Redux store changes.
 // 5. **Unsubscribe:** You can unsubscribe from the store by calling the function returned by the `subscribe` method.
 
-const store = createStore(reducer);
+//combile redusers using root reduser
+const rootReducer = combineReducers({
+  book: bookReducer,
+  magazine: magazineReducer,
+});
+const store = createStore(rootReducer);
 
 console.log("Initial state :", store.getState());
 
