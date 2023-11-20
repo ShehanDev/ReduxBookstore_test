@@ -2,6 +2,11 @@ const redux = require("redux");
 const createStore = redux.createStore;
 const bindActionCreators = redux.bindActionCreators;
 const combineReducers = redux.combineReducers;
+//middleweres
+const applyMiddleware = redux.applyMiddleware;
+//logger middleware
+const reduxLogger = require("redux-logger");
+const logger = reduxLogger.createLogger();
 
 console.log("from index redux app");
 //redux app
@@ -106,13 +111,12 @@ const rootReducer = combineReducers({
   book: bookReducer,
   magazine: magazineReducer,
 });
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, applyMiddleware(logger));
 
 console.log("Initial state :", store.getState());
 
-const unsubscribe = store.subscribe(() =>
-  console.log("updated state ", store.getState())
-);
+const unsubscribe = store.subscribe( => {});
+//haddle by logs
 
 // store.dispatch(OderBook());
 // store.dispatch(OderBook());
