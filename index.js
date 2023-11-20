@@ -115,7 +115,7 @@ const store = createStore(rootReducer, applyMiddleware(logger));
 
 console.log("Initial state :", store.getState());
 
-const unsubscribe = store.subscribe( => {});
+const unsubscribe = store.subscribe(() => {});
 //haddle by logs
 
 // store.dispatch(OderBook());
