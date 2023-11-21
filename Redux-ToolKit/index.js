@@ -2,11 +2,9 @@ const store = require("./app/store");
 const { bookActions } = require("./fetures/books/bookSlice");
 const { magazineActions } = require("./fetures/magzines/magzineSlice");
 
-console.log("Initial state :" + JSON.stringify(store.getState()));
+console.log("Initial state :" + store.getState());
 
-const unSubscribe = store.subscribe(() => {
-  console.log("Updated state :" + JSON.stringify(store.getState()));
-});
+const unSubscribe = store.subscribe(() => {});
 
 store.dispatch(bookActions.ordered());
 store.dispatch(bookActions.ordered());
