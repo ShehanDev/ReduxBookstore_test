@@ -33,5 +33,5 @@ const magazineSlice = createSlice({
   },
 });
 
-export default magazineSlice.reducer;
-export const { ordered, restocked } = magazineSlice.actions;
+module.exports = magazineSlice.reducer;
+module.exports.magazineActions = magazineSlice.actions;
