@@ -1,8 +1,9 @@
-const redux = require("redux");
+import redux from "@reduxjs/toolkit";
+import  axios from("axios");
 const createStore = redux.createStore;
 const applyMiddleware = redux.applyMiddleware;
 const thunkMiddleware = require("redux-thunk").default;
-const axios = require("axios");
+
 const reduxLogger = require("redux-logger");
 const logger = reduxLogger.createLogger();
 //create async actions in redux

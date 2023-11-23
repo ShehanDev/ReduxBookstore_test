@@ -1,4 +1,4 @@
-const createSlice = require("@reduxjs/toolkit").createSlice;
+import {createSlice}  from ("@reduxjs/toolkit");
 const { bookActions } = require("../books/bookSlice");
 //initial state
 const initialState = {
@@ -32,6 +32,5 @@ const magazineSlice = createSlice({
     });
   },
 });
-
-module.exports = magazineSlice.reducer;
+export default magazineSlice.reducer;
 module.exports.magazineActions = magazineSlice.actions;
