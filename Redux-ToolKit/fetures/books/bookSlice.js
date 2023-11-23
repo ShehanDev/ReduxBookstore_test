@@ -20,6 +20,6 @@ const bookSlice = createSlice({
 });
 
 //default
-export default bookSlice.reducer;
+module.exports = bookSlice.reducer;
 //name exports
-export const { ordered, restocked } = bookSlice.actions;
+module.exports.bookActions = bookSlice.actions;
