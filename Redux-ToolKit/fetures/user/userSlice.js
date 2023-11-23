@@ -18,11 +18,13 @@ const initialState = {
 
 //generate action type, pending , fulfilled , rejected
 const fetchUsers = createAsyncThunk("user/fetchUsers", () => {
-  axios.get("https://jsonplaceholder.typicode.com/users").then((response) => {
-    response.data.map((user) => {
-      user.id;
+  return axios
+    .get("https://jsonplaceholder.typicode.com/users")
+    .then((response) => {
+      response.data.map((user) => {
+        user.id;
+      });
     });
-  });
 });
 // automatically handle errors
 
